@@ -8,14 +8,13 @@
 
 require "../model/Users.php";
 $membres = new Users();
-$membres->getAll();
-
+echo $membres->getNom();
 ?>
 
 
 <h1>Liste des Utilisateurs</h1>
 <ul>
-    <?php foreach($membres as $user){ ?>
+    <?php foreach($liste as $user){ ?>
         <li>
             <?php echo $user->nom; ?>
         </li>

@@ -41,19 +41,48 @@ class Users
             $stmt->bind_param("issss", $this->id, $this->nom, $this->mail, sha1($this->password), $this->statut);
             if($stmt->execute())
             {
-                header('Location : index.php');
+                header("Location: ../view/connection.php");
             } else {
                 echo "Echec de l'inscription";
             }
             $stmt->close();
-            return $this->getAll();
         }
     }
 
     public function getAll()
     {
         $result = $this->db->query("SELECT * FROM `users` WHERE 1");
-        $this->userLists = $result->fetch_assoc();
+        $this->userLists = $result->fetch_all();
         return $this->userLists;
+    }
+
+    public function getId()
+    {
+        $sql = $this->db->query("SELECT id FROM users");
+        while($row = $sql->fetch_assoc())
+        {
+            $this->id = $row['id'];
+        }
+        return $this->id;
+    }
+
+    public function getNom()
+    {
+        $sql = $this->db->query("SELECT nom FROM users");
+        while($row = $sql->fetch_assoc())
+        {
+            $this->nom = $row['nom'];
+        }
+        return $this->nom;
+    }
+
+    public function getPassword()
+    {
+        $sql = $this->db->query("SELECT password FROM users");
+        while($row = $sql->fetch_assoc())
+        {
+            $this->password = $row['password'];
+        }
+        return $this->password;
     }
 }

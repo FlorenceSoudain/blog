@@ -6,7 +6,7 @@
  * Time: 09:37
  */
 
-require "../model/Users.php";
+include "../model/Users.php";
 session_start();
 $inscription = new Users();
 $inscription->create();

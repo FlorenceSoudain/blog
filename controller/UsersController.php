@@ -23,7 +23,7 @@ class UsersController
 
     public function UsersList()
     {
-        $MemberList = $this->model->getAll();
-        include "../view/usersList.php";
+        $Liste = $this->model->getAll();
+        include "view/usersList.php";
     }
 }

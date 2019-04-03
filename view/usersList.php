@@ -6,12 +6,14 @@
  * Time: 14:48
  */
 
-
+/*require "../model/Users.php";
+$membres = new Users();
+$membres->getAll();*/
 ?>
 
 <h1>Liste des Utilisateurs</h1>
 <ul>
-    <?php foreach($MemberList as $user){ ?>
+    <?php foreach($Liste as $user){ ?>
         <li>
             <?php echo $user; ?>
         </li>
