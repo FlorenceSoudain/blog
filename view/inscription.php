@@ -5,11 +5,6 @@
  * Date: 02/04/2019
  * Time: 09:37
  */
-
-include "../model/Users.php";
-session_start();
-$inscription = new Users();
-$inscription->create();
 ?>
 
 <!DOCTYPE html>

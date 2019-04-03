@@ -13,6 +13,12 @@ class ArticlesController
     public function liste_articles()
     {
         $listes = $this->model->getAllArticles();
-        include "../view/listeArticles.php";
+        include "view/listeArticles.php";
+    }
+
+    public function create()
+    {
+        $create = $this->model->create();
+        include "view/newArticle.php";
     }
 }

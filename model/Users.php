@@ -41,7 +41,7 @@ class Users
             $stmt->bind_param("issss", $this->id, $this->nom, $this->mail, sha1($this->password), $this->statut);
             if($stmt->execute())
             {
-                header("Location: ../view/connection.php");
+                header("Location: index.php");
             } else {
                 echo "Echec de l'inscription";
             }

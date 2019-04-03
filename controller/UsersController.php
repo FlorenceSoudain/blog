@@ -18,7 +18,7 @@ class UsersController
     public function UserCreate()
     {
         $UserCreate = $this->model->create();
-        include "../view/inscription.php";
+        include "view/inscription.php";
     }
 
     public function UsersList()

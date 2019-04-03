@@ -35,7 +35,7 @@ class Articles
             $stmt->bind_param('isss', $this->id, $this->titre, $this->contenu, $this->idUsers);
             if($stmt->execute())
             {
-                header("Location: ../articleEssai.php");
+                header("Location: index.php");
             } else {
                 echo "Echec de l'envoi de l'article.";
             }

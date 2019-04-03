@@ -1,36 +1,69 @@
-<?php
-
-session_start();
-?>
-
-<header>Blog</header>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon blog</title>
+</head>
+<body>
+<header>
+    <h1>Blog</h1>
+</header>
 <nav>
     <ul>
         <li>
-            <a href="view/inscription.php">S'inscrire</a>
+            <a href="index.php">Accueil</a>
         </li>
         <li>
-            <a href="view/newArticle.php">Ecrire un nouvel article</a>
-        </li>
-        <li>
-            <a href="view/memberList.php">Liste des utilisateurs</a>
-        </li>
-        <li>
-            <a href="index.php?controller=Users&action=UsersList">liste</a>
+            <a href="index.php?controller=articleCreate">Créer un nouvel article</a>
         </li>
     </ul>
 </nav>
-<div></div>
-<footer></footer>
-
+<div>
 <?php
 
+session_start();
+if(!isset($_REQUEST['controller']))
+{
+    $controller = 'liste';
+} else {
+    $controller = $_REQUEST['controller'];
+}
+$action = !isset($_GET['action']);
+switch ($controller)
+{
+    case "liste":
+        require "model/Articles.php";
+        require "controller/ArticlesController.php";
+
+        $liste = new ArticlesController();
+        $liste->liste_articles();
+        break;
+    case "articleCreate":
+        require "model/Articles.php";
+        require "controller/ArticlesController.php";
+
+        $newArticle = new ArticlesController();
+        $newArticle->create();
+        break;
+    case"inscription":
+        require "model/Users.php";
+        require "controller/UsersController.php";
+
+        $inscription = new UsersController();
+        $inscription->UserCreate();
+}
+?>
+
+</div>
+<div>
+    <a href="index.php?controller=inscription">S'inscrire</a>
+</div>
+</body>
+</html>
+<?php
+/*
 $controller = isset($_REQUEST['controller']) ? $_REQUEST['controller'] : NULL;
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : NULL;
-
-if(isset($_GET['page'])){
-
-
     switch($controller)
     {
         case "Users":
@@ -63,12 +96,5 @@ if(isset($_GET['page'])){
                     break;
             }
             break;
-    }
-    } else {
-        require "model/Articles.php";
-        require "controller/ArticlesController.php";
-
-        $showArticle = new ArticlesController();
-        $showArticle->liste_articles();
 }
-?>
+?>*/
