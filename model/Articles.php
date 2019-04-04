@@ -11,6 +11,8 @@ class Articles
     private $click;
     private $dateCrea;
 
+    private $IDArticle;
+
     private $userLists;
 
     public function __construct()
@@ -26,6 +28,8 @@ class Articles
         $this->titre = filter_var(isset($_REQUEST['titre']) ? $_REQUEST['titre'] : NULL, FILTER_SANITIZE_STRING);
         $this->contenu = filter_var(isset($_REQUEST['contenu']) ? $_REQUEST['contenu'] : NULL, FILTER_SANITIZE_STRING);
         $this->idUsers = "1";
+
+        $this->IDArticle = isset($_GET['article']);
     }
 
     public function create()
@@ -75,12 +79,13 @@ class Articles
 
     public function getAllArticles()
     {
-        $this->userLists = $this->db->query("SELECT * FROM articles")->fetch_all();
+        $this->userLists = $this->db->query("SELECT * FROM articles ORDER BY date_creation DESC ")->fetch_all();
         return $this->userLists;
     }
     public function getOneArticle()
     {
-        $this->userLists = $this->db->query("SELECT * FROM articles")->fetch_all();
+        $this->userLists = $this->db->query("SELECT * FROM articles WHERE id = $this->IDArticle")->fetch_all();
         return $this->userLists;
     }
+
 }

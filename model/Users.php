@@ -99,18 +99,21 @@ class Users
     {
         $sql = $this->db->query("SELECT * FROM users")->fetch_object();
         return $sql->nom;
-    }
+    }*/
     public function connection()
     {
         if ($this->click == TRUE) {
             if (!empty($this->nom) AND !empty($this->password)) {
                 $sql = $this->db->query("SELECT * FROM users WHERE nom = '$this->nom'")->fetch_object();
-                if ($this->nom == $sql->nom AND $this->password == $sql->password) {
+                if ($this->nom === $sql->nom && sha1($this->password) === $sql->password) {
                     session_start();
 
+                    echo "ok";
                     $_SESSION['id'] = $sql->id;
                     $_SESSION['nom'] = $sql->nom;
-                    header("Location: index.php");
+                    header("Location: index.php?listeArticles");
+                } else {
+                    echo "Connection impossible";
                 }
             }
         }
@@ -120,7 +123,7 @@ class Users
     public function deconnection()
     {
         session_destroy();
-        header('Location: index.php');
-    }*/
+        header('Location: index.php?listeArticles');
+    }
 
 }

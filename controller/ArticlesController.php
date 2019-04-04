@@ -21,4 +21,10 @@ class ArticlesController
         $create = $this->model->create();
         include "view/newArticle.php";
     }
+
+    public function selectionArticle()
+    {
+        $article = $this->model->getOneArticle();
+        include "view/listeArticle.php";
+    }
 }

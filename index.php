@@ -8,6 +8,7 @@ session_start();
     <meta charset="UTF-8">
     <title>Mon blog</title>
     <link rel="stylesheet" href="style.css">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
 </head>
 <body>
 <header>
@@ -28,9 +29,9 @@ session_start();
 <?php
 $_SESSION['id'] = isset($_SESSION['id']) ? $_SESSION['id'] : NULL;
 if ($_SESSION['id'] == NULL) {
-    echo "Bonjour ";
+    echo "Bonjour";
 } else {
-    echo "Bonjour" . $_SESSION['nom'];
+    echo "Bonjour " . $_SESSION['nom'];
 }
 
 if(!isset($_REQUEST['controller']))
@@ -77,11 +78,21 @@ switch ($controller)
         $connection = new UsersController();
         $connection->UserConnect();
         break;
+    case"deconnection":
+        require "model/Users.php";
+        require "controller/UsersController.php";
+
+        $deconnection = new UsersController();
+        $deconnection->Deconnect();
 }
 
+if(isset($_REQUEST['article']))
+{
+    $article = $_REQUEST['article'];
+}
 ?>
     </div>
-    <div>
+    <div id="div2">
         <p>Paragraphe</p>
     </div>
 </div>
@@ -89,6 +100,7 @@ switch ($controller)
     <a href="index.php?controller=inscription">S'inscrire</a>
     <a href="index.php?controller=connection">Se connecter</a>
     <a href="index.php?controller=listeUsers">Liste</a>
+    <a href="index.php?controller=deconnection">Déconnection</a>
 </div>
 </body>
 </html>

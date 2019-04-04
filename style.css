@@ -1,5 +1,14 @@
 body{
+    width: 100%;
+    margin: 0;
+    padding: 0;
     background-color: lavender;
+}
+#container{
+    margin: auto;
+    padding: 10px;
+    width: 80%;
+    background-color: transparent;
 }
 header{
     width: 100%;
@@ -7,4 +16,13 @@ header{
 }
 #float{
     float: left;
+    width: 80%;
+    background-color: aliceblue;
+}
+#div2{
+    float: left;
+    width: 20%;
+}
+footer{
+    clear: both;
 }
