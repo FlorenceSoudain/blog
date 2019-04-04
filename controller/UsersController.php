@@ -21,9 +21,23 @@ class UsersController
         include "view/inscription.php";
     }
 
+    public function UserConnect()
+    {
+        $UserConnect = $this->model->connection();
+        include "view/connection.php";
+    }
+
     public function UsersList()
     {
-        $Liste = $this->model->getAll();
+        $Liste = $this->model->getAllUsers();
         include "view/usersList.php";
     }
+
+    public function Deconnect()
+    {
+        $Deconnection = $this->model->deconnection();
+        include "index.php";
+    }
+
+
 }

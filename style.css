@@ -1,0 +1,10 @@
+body{
+    background-color: lavender;
+}
+header{
+    width: 100%;
+    background: cadetblue;
+}
+#float{
+    float: left;
+}

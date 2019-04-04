@@ -1,8 +1,13 @@
-<!DOCTYPE html>
+<?php
+session_start();
+
+?>
+    <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Mon blog</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header>
@@ -18,20 +23,26 @@
         </li>
     </ul>
 </nav>
-<div>
+<div id="container">
+    <div id="float">
 <?php
+$_SESSION['id'] = isset($_SESSION['id']) ? $_SESSION['id'] : NULL;
+if ($_SESSION['id'] == NULL) {
+    echo "Bonjour ";
+} else {
+    echo "Bonjour" . $_SESSION['nom'];
+}
 
-session_start();
 if(!isset($_REQUEST['controller']))
 {
-    $controller = 'liste';
+    $controller = 'listeArticle';
 } else {
     $controller = $_REQUEST['controller'];
 }
 $action = !isset($_GET['action']);
 switch ($controller)
 {
-    case "liste":
+    case "listeArticle":
         require "model/Articles.php";
         require "controller/ArticlesController.php";
 
@@ -51,50 +62,34 @@ switch ($controller)
 
         $inscription = new UsersController();
         $inscription->UserCreate();
-}
-?>
+        break;
+    case"listeUsers":
+        require "model/Users.php";
+        require "controller/UsersController.php";
 
+        $listeUsers = new UsersController();
+        $listeUsers->UsersList();
+        break;
+    case"connection":
+        require "model/Users.php";
+        require "controller/UsersController.php";
+
+        $connection = new UsersController();
+        $connection->UserConnect();
+        break;
+}
+
+?>
+    </div>
+    <div>
+        <p>Paragraphe</p>
+    </div>
 </div>
 <div>
     <a href="index.php?controller=inscription">S'inscrire</a>
+    <a href="index.php?controller=connection">Se connecter</a>
+    <a href="index.php?controller=listeUsers">Liste</a>
 </div>
 </body>
 </html>
 <?php
-/*
-$controller = isset($_REQUEST['controller']) ? $_REQUEST['controller'] : NULL;
-$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : NULL;
-    switch($controller)
-    {
-        case "Users":
-            require "model/Users.php";
-            require "controller/UsersController.php";
-
-            $ctrl = new UsersController();
-
-            switch($action)
-            {
-                case"UserCreate":
-                    $ctrl->UserCreate();
-                    break;
-                case "UsersList":
-                    $ctrl->UsersList();
-                    break;
-            }
-            break;
-
-        case "Articles":
-            require "model/Articles.php";
-            require "controller/ArticlesController.php";
-
-            $ctrl = new ArticlesController();
-
-            switch($action)
-            {
-                case"getAllArticles":
-                    $ctrl->liste_articles();
-                    break;
-            }
-            break;
-}
-?>*/

@@ -15,7 +15,7 @@ $membres->getAll();*/
 <ul>
     <?php foreach($Liste as $user){ ?>
         <li>
-            <?php echo $user; ?>
+            <?php echo $user['1']; ?>
         </li>
     <?php } ?>
 </ul>

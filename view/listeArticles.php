@@ -3,7 +3,7 @@
  foreach ($listes as $item) { ?>
 
     <ul>
-        <li><?php echo $item['1']; ?></li>
+        <li><a href="../index.php?article=<?php echo $item['0']?>"> <?php echo $item['1']; ?></a></li>
     </ul>
 <?php }
 
