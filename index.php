@@ -30,8 +30,13 @@ session_start();
 $_SESSION['id'] = isset($_SESSION['id']) ? $_SESSION['id'] : NULL;
 if ($_SESSION['id'] == NULL) {
     echo "Bonjour";
-} else {
-    echo "Bonjour " . $_SESSION['nom'];
+    ?><a href="index.php?controller=inscription">S'inscrire</a>
+    <a href="index.php?controller=connection">Se connecter</a><?php
+} else { ?>
+    <div>
+    <span>Bonjour, <?php echo $_SESSION['nom'] ?></span> <a>Espace-administration</a> <a href="index.php?controller=listeUsers">Liste</a> <a href="index.php?controller=deconnection">Déconnection</a>
+    </div>
+    <?php
 }
 
 if(!isset($_REQUEST['controller']))
@@ -84,23 +89,19 @@ switch ($controller)
 
         $deconnection = new UsersController();
         $deconnection->Deconnect();
-}
+        break;
+    case"afficherArticle":
+        require "model/Articles.php";
+        require "controller/ArticlesController.php";
 
-if(isset($_REQUEST['article']))
-{
-    $article = $_REQUEST['article'];
+        $article = new ArticlesController();
+        $article->selectionArticle();
 }
 ?>
     </div>
     <div id="div2">
         <p>Paragraphe</p>
     </div>
-</div>
-<div>
-    <a href="index.php?controller=inscription">S'inscrire</a>
-    <a href="index.php?controller=connection">Se connecter</a>
-    <a href="index.php?controller=listeUsers">Liste</a>
-    <a href="index.php?controller=deconnection">Déconnection</a>
 </div>
 </body>
 </html>

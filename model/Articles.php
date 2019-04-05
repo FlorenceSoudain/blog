@@ -17,8 +17,8 @@ class Articles
 
     public function __construct()
     {
-        $this->db = new mysqli("localhost", "root", "", "evalPHP");
-        /*$this->db = new mysqli("localhost", "id7331131_root", "SQEX10177kh", "id7331131_evalphp");*/
+        /*$this->db = new mysqli("localhost", "root", "", "evalPHP");*/
+        $this->db = new mysqli("localhost", "id7331131_root", "SQEX10177kh", "id7331131_evalphp");
         if($this->db->connect_errno)
         {
             echo "Echec lors de la connexion à la base de donnée : (" . $this->db->connect_errno . ") " . $this->db->connect_error;
@@ -77,14 +77,14 @@ class Articles
         return $this->dateCrea;
     }
 
-    public function getAllArticles()
+    public function listeArticles()
     {
         $this->userLists = $this->db->query("SELECT * FROM articles ORDER BY date_creation DESC ")->fetch_all();
         return $this->userLists;
     }
     public function getOneArticle()
     {
-        $this->userLists = $this->db->query("SELECT * FROM articles WHERE id = $this->IDArticle")->fetch_all();
+        $this->userLists = $this->db->query("SELECT * FROM articles")->fetch_all();
         return $this->userLists;
     }
 

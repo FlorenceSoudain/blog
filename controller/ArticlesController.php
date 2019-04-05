@@ -12,7 +12,7 @@ class ArticlesController
 
     public function liste_articles()
     {
-        $listes = $this->model->getAllArticles();
+        $listes = $this->model->listeArticles();
         include "view/listeArticles.php";
     }
 
@@ -25,6 +25,6 @@ class ArticlesController
     public function selectionArticle()
     {
         $article = $this->model->getOneArticle();
-        include "view/listeArticle.php";
+        include "view/article.php";
     }
 }
