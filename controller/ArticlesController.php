@@ -27,4 +27,24 @@ class ArticlesController
         $article = $this->model->getOneArticle();
         include "view/article.php";
     }
+
+    public function commCreate()
+    {
+        $commCreate = $this->model->createCommentaire();
+        include "view/article.php";
+    }
+
+    public function modifierArticle()
+    {
+        $modifier = $this->model->modifierArticle();
+        $valeurs = $this->model->getOneArticle();
+        include "view/modifier.php";
+    }
+
+    public function supprimerArticle()
+    {
+        $supprimer = $this->model->supprimerArticle();
+
+        include "view/article.php";
+    }
 }

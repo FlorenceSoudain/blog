@@ -26,3 +26,67 @@ header{
 footer{
     clear: both;
 }
+#commentaire{
+    border-top: solid 1px black;
+}
+/* MENU HAMBURGER*/
+
+/* Cible les éléments a dans l'élément ayant pour id hamburger-menu avec le symbole > */
+#hamburger-menu > a {
+    /* La régle la plus importante (display inline block */
+    display: inline-block;
+    width: auto;
+    padding: 10px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+/* CSS pour le bouton du menu */
+#hamburger-menu > span{
+    display: none;
+    text-align: center;
+    line-height: 5px;
+    padding-bottom: 20px;
+}
+
+/* MEDIA QUERIES */
+
+/* On cible la majorité des tablettes et les petits écrans (ou les vieux PC) */
+@media (max-width: 1388px){
+    #main{
+        width: 100%;
+    }
+}
+/* On cible les smartphones */
+@media(max-width: 812px){
+    #container{
+        width: 100%;
+    }
+    #menu-gauche{
+        width: 100%;
+    }
+    #contenu{
+        width: 100%;
+    }
+    /* Masque les liens sur mobile */
+    #hamburger-menu > a{
+        display:none;
+    }
+    /* Afficher le bouton qui déclenche le menu hamburger */
+    #hamburger-menu > span{
+        display: inline-block;
+    }
+    /* Régles pour afficher le menu lorsqu'on click sur le bouton */
+    #hamburger-menu:hover > a{
+        width: 80%;
+        display: block;
+        margin: 10px auto;
+    }
+
+    /* Petite animation bonus du bouton hamburger */
+    #hamburger-menu:hover > span{
+        transform: rotate(90deg);
+        transition-property: transform;
+        transition-duration: 0.5s;
+    }
+}

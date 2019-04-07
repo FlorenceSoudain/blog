@@ -36,9 +36,14 @@ class UsersController
     public function Deconnect()
     {
         $Deconnection = $this->model->deconnection();
-        include "index.php";
+        include "view/listeArticles.php";
     }
 
+    public function selectAdmin()
+    {
+        $administrateur = $this->model->getOneAdmin();
+        include "view/admin.php";
+    }
 
 
 }

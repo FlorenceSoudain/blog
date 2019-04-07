@@ -24,8 +24,8 @@ class Users
 
     public function __construct()
     {
-        $this->db = new mysqli("localhost", "root", "", "evalPHP");
-        /*$this->db = new mysqli("localhost", "id7331131_root", "SQEX10177kh", "id7331131_evalphp");*/
+        /*$this->db = new mysqli("localhost", "root", "", "evalPHP");*/
+        $this->db = new mysqli("localhost", "id7331131_root", "SQEX10177kh", "id7331131_evalphp");
         if ($this->db->connect_errno) {
             echo "Echec lors de la connexion à la base de donnée : (" . $this->db->connect_errno . ") " . $this->db->connect_error;
         }
@@ -43,7 +43,7 @@ class Users
             $stmt = $this->db->prepare("INSERT INTO users VALUES (?,?,?,?,?)");
             $stmt->bind_param("issss", $this->id, $this->nom, $this->mail, sha1($this->password), $this->statut);
             if ($stmt->execute()) {
-                header("Location: index.php");
+                header("Location: controller=listeArticle");
             } else {
                 echo "Echec de l'inscription";
             }
@@ -57,49 +57,6 @@ class Users
         return $this->userLists;
     }
 
-    public function getId()
-    {
-        $sql = $this->db->query("SELECT id FROM users");
-        while ($row = $sql->fetch_assoc()) {
-            $this->id = $row['id'];
-        }
-        return $this->id;
-    }
-
-    public function getNom()
-    {
-        $sql = $this->db->query("SELECT nom FROM users");
-        while ($row = $sql->fetch_assoc()) {
-            $this->nom = $row['nom'];
-        }
-        return $this->nom;
-    }
-
-    public function getPassword()
-    {
-        $sql = $this->db->query("SELECT password FROM users");
-        while ($row = $sql->fetch_assoc()) {
-            $this->password = $row['password'];
-        }
-        return $this->password;
-    }
-
-    /*public function selection()
-    {
-        $result = $this->db->query("SELECT * FROM users WHERE nom = '$this->nom'");
-        while ($res = $result->fetch_assoc()) {
-            $this->DBID = $res['id'];
-            $this->DBNom = $res['nom'];
-            $this->DBPassword = $res['password'];
-            $this->DBStatut = $res['statut'];
-        }
-    }
-
-    public function essai()
-    {
-        $sql = $this->db->query("SELECT * FROM users")->fetch_object();
-        return $sql->nom;
-    }*/
     public function connection()
     {
         if ($this->click == TRUE) {
@@ -111,7 +68,8 @@ class Users
                     echo "ok";
                     $_SESSION['id'] = $sql->id;
                     $_SESSION['nom'] = $sql->nom;
-                    header("Location: index.php?listeArticles");
+                    $_SESSION['statut'] = $sql->statut;
+                    header("Location: index.php?controller=listeArticle");
                 } else {
                     echo "Connection impossible";
                 }
@@ -123,7 +81,13 @@ class Users
     public function deconnection()
     {
         session_destroy();
-        header('Location: index.php?listeArticles');
+        header('Location: index.php?controller=listeArticle');
+    }
+
+    public function getOneAdmin()
+    {
+        $this->userLists = $this->db->query("SELECT * FROM users")->fetch_all();
+        return $this->userLists;
     }
 
 }
