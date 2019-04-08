@@ -18,12 +18,12 @@ class CommentaireController
     public function commCreate()
     {
         $commCreate = $this->model->ajoutCommentaire();
-        include "view/articles.php";
+        include "view/article.php";
     }
 
     public function afficherCommentaires()
     {
         $commentaire = $this->model->getCommentaires();
-        include "view/articles.php";
+        include "view/article.php";
     }
 }

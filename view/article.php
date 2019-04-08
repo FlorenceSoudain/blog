@@ -16,7 +16,7 @@ $_SESSION['nom'] = isset($_SESSION['nom']) ? $_SESSION['nom'] : NULL;
 <?php if($_SESSION['id']){ ?>
 <div id="commentaire">
     <h3>Commentaires</h3>
-    <form action="" method="post">
+    <form action="index.php?controller=commentairesCreate" method="post">
         <label for="message">Message</label>
         <textarea id="message" name="message"></textarea>
         <input id="btnNewCommentaire" type="submit" name="button" value="Envoyer">

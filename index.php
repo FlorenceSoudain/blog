@@ -1,7 +1,13 @@
 <?php
+
+//ouverture de la session
 session_start();
 
+//Annonce des sessions
+$_SESSION['id'] = isset($_SESSION['id']) ? $_SESSION['id'] : NULL;
+$_SESSION['statut'] = isset($_SESSION['statut']) ? $_SESSION['statut'] : NULL;
 ?>
+
     <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -11,47 +17,44 @@ session_start();
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
 </head>
 <body>
+
 <header>
     <h1>Blog</h1>
 </header>
+
 <nav>
-    <ul>
-        <li>
+    <div id="hamburger-menu">
+        <span>...</span>
+        <?php
+        //Nav qui apparait si l'utilisateur n'est pas connecté
+        if ($_SESSION['id'] == NULL) { ?>
             <a href="index.php">Accueil</a>
-        </li>
-        <li>
+            <a href="index.php?controller=inscription">S'inscrire</a>
+            <a href="index.php?controller=connection">Se connecter</a>
+        <?php }
+
+        //Nav qui apparait si l'utilisateur connecté a le statut d'administrateur
+        if($_SESSION['statut'] === 'administrateur') { ?>
+            <a href="index.php">Accueil</a>
             <a href="index.php?controller=articleCreate">Créer un nouvel article</a>
-        </li>
-    </ul>
+            <a href="index.php?controller=afficherAdmin&n=<?php echo $_SESSION['id'] ?>">Espace-administration</a>
+            <a href="index.php?controller=listeUsers">Liste des utilisateurs</a>
+            <a href="index.php?controller=deconnection">Déconnection</a>
+        <?php }
+
+        //Nav qui apparait si l'utilisateur connecté a le statut de membre
+        if($_SESSION['statut'] === 'membre') { ?>
+        <a href="index.php">Accueil</a>
+        <a href="#">Espace Membre</a>
+        <a href="index.php?controller=deconnection">Déconnection</a>
+        <?php } ?>
+    </div>
 </nav>
+
+
 <div id="container">
     <div id="float">
 <?php
-
-//Annonce des sessions
-$_SESSION['id'] = isset($_SESSION['id']) ? $_SESSION['id'] : NULL;
-$_SESSION['statut'] = isset($_SESSION['statut']) ? $_SESSION['statut'] : NULL;
-
-//Conditions : si l'utilisateur n'est pas connecté, affiche une solicitation à s'inscrire ou se connecter
-if ($_SESSION['id'] == NULL) { ?><span>Bonjour.</span> <a href="index.php?controller=inscription">S'inscrire</a>
-    <a href="index.php?controller=connection">Se connecter</a>
-    <?php } else { ?>
-    <div>
-        <span>Bonjour, <?php echo $_SESSION['nom'] ?></span>
-
-        <?php
-        //Si la Session Statut renvoie administrateur, la page administration s'ouvre
-        if($_SESSION['statut'] === 'administrateur') { ?>
-            <a href="index.php?controller=afficherAdmin&n=<?php echo $_SESSION['id'] ?>">Espace-administration</a>
-        <?php }
-        //Si la Session Statut renvoie membre, la page membre s'ouvre
-        if($_SESSION['statut'] === 'membre') { ?>
-            <a href="#">Espace Membre</a>
-        <?php } ?>
-        <a href="index.php?controller=listeUsers">Liste</a>
-        <a href="index.php?controller=deconnection">Déconnection</a>
-    </div>
-    <?php }
 
 if(!isset($_REQUEST['controller']))
 {
@@ -149,10 +152,9 @@ switch ($controller) {
     </div>
     <div id="div2">
         <p>Paragraphe</p>
-        <a href="index.php?controller=essai">Essai</a>
     </div>
 </div>
 
-<script src="script.js"></script>
+
 </body>
 </html>

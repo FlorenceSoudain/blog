@@ -7,7 +7,6 @@ class Articles
     private $id;
     private $titre;
     private $contenu;
-    private $idUsers;
     private $click;
     private $dateCrea;
 
@@ -20,17 +19,18 @@ class Articles
 
     public function __construct()
     {
+        //Connection à la base de donnée
         /*$this->db = new mysqli("localhost", "root", "", "evalPHP");*/
-        $this->db = new mysqli("localhost", "id7331131_root", "SQEX10177kh", "id7331131_evalphp");
+        $this->db = new mysqli("localhost", "id7331131_root", "mmm000", "id7331131_evalphp");
         if($this->db->connect_errno)
         {
             echo "Echec lors de la connexion à la base de donnée : (" . $this->db->connect_errno . ") " . $this->db->connect_error;
         }
 
+        //Récupération des données envoyé par les formulaires
         $this->click = isset($_REQUEST['button']);
         $this->titre = filter_var(isset($_REQUEST['titre']) ? $_REQUEST['titre'] : NULL, FILTER_SANITIZE_STRING);
         $this->contenu = filter_var(isset($_REQUEST['contenu']) ? $_REQUEST['contenu'] : NULL, FILTER_SANITIZE_STRING);
-        $this->idUsers = "1";
 
         $this->message = filter_var(isset($_REQUEST['message']) ? $_REQUEST['message'] : NULL, FILTER_SANITIZE_STRING);
         $this->nom = isset($_SESSION['nom']);
@@ -40,12 +40,13 @@ class Articles
         $this->n = isset($_GET['n']);
     }
 
+    //Fonction pour créer un nouvel article
     public function create()
     {
         if($this->click == TRUE)
         {
-            $stmt = $this->db->prepare("INSERT INTO articles VALUES(?,?,now(),?,?)");
-            $stmt->bind_param('isss', $this->id, $this->titre, $this->contenu, $this->idUsers);
+            $stmt = $this->db->prepare("INSERT INTO articles VALUES(?,?,now(),?)");
+            $stmt->bind_param('iss', $this->id, $this->titre, $this->contenu);
             if($stmt->execute())
             {
                 header("Location: index.php?controller=listeArticle");
@@ -56,18 +57,21 @@ class Articles
         }
     }
 
+    //Fonction pour lister les articles
     public function listeArticles()
     {
-        $this->userLists = $this->db->query("SELECT id, titre, DATE_FORMAT(date_creation, '%d/%m/%Y'), contenu, id_users FROM articles ORDER BY date_creation DESC ")->fetch_all();
+        $this->userLists = $this->db->query("SELECT id, titre, DATE_FORMAT(date_creation, '%d/%m/%Y'), contenu FROM articles ORDER BY date_creation DESC ")->fetch_all();
         return $this->userLists;
     }
 
+    //Fonction pour sélectionner un article
     public function getOneArticle()
     {
-        $this->userLists = $this->db->query("SELECT id, titre, DATE_FORMAT(date_creation, '%d/%m/%Y'), contenu, id_users FROM articles")->fetch_all();
+        $this->userLists = $this->db->query("SELECT id, titre, DATE_FORMAT(date_creation, '%d/%m/%Y'), contenu FROM articles")->fetch_all();
         return $this->userLists;
     }
 
+    //Fonction pour modifier un article
     public function modifierArticle()
     {
         if($this->click == TRUE)
@@ -88,6 +92,7 @@ class Articles
         }
     }
 
+    //Fonction pour supprimer un article
     public function supprimerArticle()
     {
             $stmt = $this->db->prepare("DELETE FROM `articles` WHERE id = '$this->n'");

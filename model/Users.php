@@ -25,7 +25,7 @@ class Users
     public function __construct()
     {
         /*$this->db = new mysqli("localhost", "root", "", "evalPHP");*/
-        $this->db = new mysqli("localhost", "id7331131_root", "SQEX10177kh", "id7331131_evalphp");
+        $this->db = new mysqli("localhost", "id7331131_root", "mmm000", "id7331131_evalphp");
         if ($this->db->connect_errno) {
             echo "Echec lors de la connexion à la base de donnée : (" . $this->db->connect_errno . ") " . $this->db->connect_error;
         }
@@ -63,13 +63,11 @@ class Users
             if (!empty($this->nom) AND !empty($this->password)) {
                 $sql = $this->db->query("SELECT * FROM users WHERE nom = '$this->nom'")->fetch_object();
                 if ($this->nom === $sql->nom && sha1($this->password) === $sql->password) {
-                    session_start();
 
-                    echo "ok";
+                    echo "Connection réussi !";
                     $_SESSION['id'] = $sql->id;
                     $_SESSION['nom'] = $sql->nom;
                     $_SESSION['statut'] = $sql->statut;
-                    header("Location: index.php?controller=listeArticle");
                 } else {
                     echo "Connection impossible";
                 }
@@ -81,7 +79,7 @@ class Users
     public function deconnection()
     {
         session_destroy();
-        header('Location: index.php?controller=listeArticle');
+        header('Location: index.php');
     }
 
     public function getOneAdmin()

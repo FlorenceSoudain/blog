@@ -3,6 +3,7 @@ body{
     margin: 0;
     padding: 0;
     background-color: lavender;
+    font-family: 'Verdana', sans-serif;
 }
 #container{
     margin: auto;
@@ -13,15 +14,24 @@ body{
 header{
     width: 100%;
     background: cadetblue;
+    padding: 1%;
+    text-align: center;
+}
+nav{
+    width: 100%;
+    text-align: center;
+    padding: 1%;
 }
 #float{
     float: left;
     width: 80%;
     background-color: aliceblue;
+    padding: 1%;
 }
 #div2{
     float: left;
-    width: 20%;
+    width: 15%;
+    padding: 1%;
 }
 footer{
     clear: both;
@@ -29,19 +39,22 @@ footer{
 #commentaire{
     border-top: solid 1px black;
 }
+.flex{
+    display: flex;
+    flex-direction: column;
+    margin: 1%;
+}
 /* MENU HAMBURGER*/
 
-/* Cible les éléments a dans l'élément ayant pour id hamburger-menu avec le symbole > */
 #hamburger-menu > a {
-    /* La régle la plus importante (display inline block */
     display: inline-block;
     width: auto;
     padding: 10px;
     margin-right: 15px;
     cursor: pointer;
+    list-style-type: none;
 }
 
-/* CSS pour le bouton du menu */
 #hamburger-menu > span{
     display: none;
     text-align: center;
@@ -51,39 +64,30 @@ footer{
 
 /* MEDIA QUERIES */
 
-/* On cible la majorité des tablettes et les petits écrans (ou les vieux PC) */
 @media (max-width: 1388px){
-    #main{
+    #container{
         width: 100%;
     }
 }
-/* On cible les smartphones */
+
 @media(max-width: 812px){
     #container{
         width: 100%;
     }
-    #menu-gauche{
+    #float, #div2{
         width: 100%;
     }
-    #contenu{
-        width: 100%;
-    }
-    /* Masque les liens sur mobile */
     #hamburger-menu > a{
         display:none;
     }
-    /* Afficher le bouton qui déclenche le menu hamburger */
     #hamburger-menu > span{
         display: inline-block;
     }
-    /* Régles pour afficher le menu lorsqu'on click sur le bouton */
     #hamburger-menu:hover > a{
         width: 80%;
         display: block;
         margin: 10px auto;
     }
-
-    /* Petite animation bonus du bouton hamburger */
     #hamburger-menu:hover > span{
         transform: rotate(90deg);
         transition-property: transform;

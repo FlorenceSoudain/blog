@@ -16,14 +16,16 @@
 <body>
 <div>
     <form action="" method="post">
-        <h2>Inscription</h2>
-        <label for="nom">Nom d'utilisateur</label>
-        <input id="nom" name="nom" type="text">
-        <label for="mail">E-Mail</label>
-        <input id="mail" name="mail" type="email">
-        <label for="password">Mot de passe</label>
-        <input id="password" name="password" type="password">
-        <input id="btninscription" type="submit" name="button" value="S'inscrire">
+        <div class="flex">
+            <h2>Inscription</h2>
+            <label for="nom">Nom d'utilisateur</label>
+            <input id="nom" name="nom" type="text">
+            <label for="mail">E-Mail</label>
+            <input id="mail" name="mail" type="email">
+            <label for="password">Mot de passe</label>
+            <input id="password" name="password" type="password">
+            <input id="btninscription" type="submit" name="button" value="S'inscrire">
+        </div>
     </form>
 </div>
 </body>
