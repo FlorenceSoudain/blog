@@ -23,7 +23,7 @@ class CommentaireController
 
     public function afficherCommentaires()
     {
-        $commentaire = $this->model->getCommentaires();
+        $commentaires = $this->model->getCommentaires();
         include "view/article.php";
     }
 }

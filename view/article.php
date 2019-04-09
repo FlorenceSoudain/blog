@@ -24,4 +24,8 @@ $_SESSION['nom'] = isset($_SESSION['nom']) ? $_SESSION['nom'] : NULL;
 </div>
 <?php } else { ?>
 <span>Connectez-vous pour poster un commentaire.</span>
-<?php } ?>
+<?php }
+var_dump($commentaires);
+foreach ($commentaires as $commentaire){?>
+<div><?php echo $commentaire->contenu; ?></div>
+<?php }

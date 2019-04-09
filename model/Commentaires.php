@@ -46,7 +46,7 @@ class Commentaires
 
     public function getCommentaires()
     {
-        $this->commentaires = $this->db->query("SELECT id, nom, message, DATE_FORMAT(date_creation, '%d/%m/%Y') FROM commentaires ORDER BY date_creation DESC ")->fetch_all();
+        $this->commentaires = $this->db->query("SELECT id, nom, message, DATE_FORMAT(date_creation, '%d/%m/%Y') FROM commentaires WHERE id_article = '$this->IDArticle' ORDER BY date_creation DESC ")->fetch_object();
         return $this->commentaires;
     }
 }

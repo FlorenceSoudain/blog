@@ -37,7 +37,7 @@ class Articles
 
         $this->IDArticle = isset($_GET['article']);
 
-        $this->n = isset($_GET['n']);
+        $this->n = isset($_REQUEST['n']) ? $_REQUEST['n'] : NULL;
     }
 
     //Fonction pour créer un nouvel article
