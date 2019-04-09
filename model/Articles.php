@@ -20,8 +20,8 @@ class Articles
     public function __construct()
     {
         //Connection à la base de donnée
-        /*$this->db = new mysqli("localhost", "root", "", "evalPHP");*/
-        $this->db = new mysqli("localhost", "id7331131_root", "mmm000", "id7331131_evalphp");
+        $this->db = new mysqli("localhost", "root", "", "evalPHP");
+        /*$this->db = new mysqli("localhost", "id7331131_root", "mmm000", "id7331131_evalphp");*/
         if($this->db->connect_errno)
         {
             echo "Echec lors de la connexion à la base de donnée : (" . $this->db->connect_errno . ") " . $this->db->connect_error;
@@ -45,6 +45,7 @@ class Articles
     {
         if($this->click == TRUE)
         {
+            mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
             $stmt = $this->db->prepare("INSERT INTO articles VALUES(?,?,now(),?)");
             $stmt->bind_param('iss', $this->id, $this->titre, $this->contenu);
             if($stmt->execute())
